@@ -1,0 +1,389 @@
+Version 3.2 HI-TECH Software Intermediate Code
+"1 graphic.c
+[v _GLCD_SetPixel `(v ~T0 @X0 0 ef3`uc`uc`uc ]
+[; ;graphic.c: 1: extern void GLCD_SetPixel(unsigned char x, unsigned char y, unsigned char color);
+"3 graphic.c
+[v _color `Cuc ~T0 @X0 1 e ]
+[i _color
+-> -> 1 `i `uc
+]
+[; ;graphic.c: 3: const unsigned char color = 1;
+"5
+[v _GLCD_Rectangle `(v ~T0 @X0 1 ef4`uc`uc`uc`uc ]
+"6
+{
+[; ;graphic.c: 5: void GLCD_Rectangle(unsigned char x, unsigned char y, unsigned char b, unsigned char a)
+[; ;graphic.c: 6: {
+[e :U _GLCD_Rectangle ]
+"5
+[v _x `uc ~T0 @X0 1 r1 ]
+[v _y `uc ~T0 @X0 1 r2 ]
+[v _b `uc ~T0 @X0 1 r3 ]
+[v _a `uc ~T0 @X0 1 r4 ]
+"6
+[f ]
+"7
+[v _j `uc ~T0 @X0 1 a ]
+[; ;graphic.c: 7: unsigned char j;
+[; ;graphic.c: 9: for (j = 0; j < a; j++) {
+"9
+{
+[e = _j -> -> 0 `i `uc ]
+[e $U 5  ]
+[e :U 2 ]
+{
+[; ;graphic.c: 10: GLCD_SetPixel(x, y + j, color);
+"10
+[e ( _GLCD_SetPixel (3 , , _x -> + -> _y `i -> _j `i `uc _color ]
+[; ;graphic.c: 11: GLCD_SetPixel(x + b - 1, y + j, color);
+"11
+[e ( _GLCD_SetPixel (3 , , -> - + -> _x `i -> _b `i -> 1 `i `uc -> + -> _y `i -> _j `i `uc _color ]
+"12
+}
+"9
+[e ++ _j -> -> 1 `i `uc ]
+[e :U 5 ]
+[e $ < -> _j `i -> _a `i 2  ]
+[e :U 3 ]
+"12
+}
+[; ;graphic.c: 12: }
+[; ;graphic.c: 14: for (j = 0; j < b; j++) {
+"14
+{
+[e = _j -> -> 0 `i `uc ]
+[e $U 9  ]
+[e :U 6 ]
+{
+[; ;graphic.c: 15: GLCD_SetPixel(x + j, y, color);
+"15
+[e ( _GLCD_SetPixel (3 , , -> + -> _x `i -> _j `i `uc _y _color ]
+[; ;graphic.c: 16: GLCD_SetPixel(x + j, y + a - 1, color);
+"16
+[e ( _GLCD_SetPixel (3 , , -> + -> _x `i -> _j `i `uc -> - + -> _y `i -> _a `i -> 1 `i `uc _color ]
+"17
+}
+"14
+[e ++ _j -> -> 1 `i `uc ]
+[e :U 9 ]
+[e $ < -> _j `i -> _b `i 6  ]
+[e :U 7 ]
+"17
+}
+[; ;graphic.c: 17: }
+[; ;graphic.c: 18: }
+"18
+[e :UE 1 ]
+}
+"21
+[v _GLCD_Circle `(v ~T0 @X0 1 ef3`uc`uc`uc ]
+"22
+{
+[; ;graphic.c: 21: void GLCD_Circle(unsigned char cx, unsigned char cy ,unsigned char radius)
+[; ;graphic.c: 22: {
+[e :U _GLCD_Circle ]
+"21
+[v _cx `uc ~T0 @X0 1 r1 ]
+[v _cy `uc ~T0 @X0 1 r2 ]
+[v _radius `uc ~T0 @X0 1 r3 ]
+"22
+[f ]
+"23
+[v _x `i ~T0 @X0 1 a ]
+[v _y `i ~T0 @X0 1 a ]
+[v _xchange `i ~T0 @X0 1 a ]
+[v _ychange `i ~T0 @X0 1 a ]
+[v _radiusError `i ~T0 @X0 1 a ]
+[; ;graphic.c: 23: int x, y, xchange, ychange, radiusError;
+[; ;graphic.c: 24: x = radius;
+"24
+[e = _x -> _radius `i ]
+[; ;graphic.c: 25: y = 0;
+"25
+[e = _y -> 0 `i ]
+[; ;graphic.c: 26: xchange = 1 - 2 * radius;
+"26
+[e = _xchange - -> 1 `i * -> 2 `i -> _radius `i ]
+[; ;graphic.c: 27: ychange = 1;
+"27
+[e = _ychange -> 1 `i ]
+[; ;graphic.c: 28: radiusError = 0;
+"28
+[e = _radiusError -> 0 `i ]
+[; ;graphic.c: 29: while(x >= y)
+"29
+[e $U 11  ]
+[e :U 12 ]
+[; ;graphic.c: 30: {
+"30
+{
+[; ;graphic.c: 31: GLCD_SetPixel(cx+x, cy+y, color);
+"31
+[e ( _GLCD_SetPixel (3 , , -> + -> _cx `i _x `uc -> + -> _cy `i _y `uc _color ]
+[; ;graphic.c: 32: GLCD_SetPixel(cx-x, cy+y, color);
+"32
+[e ( _GLCD_SetPixel (3 , , -> - -> _cx `i _x `uc -> + -> _cy `i _y `uc _color ]
+[; ;graphic.c: 33: GLCD_SetPixel(cx-x, cy-y, color);
+"33
+[e ( _GLCD_SetPixel (3 , , -> - -> _cx `i _x `uc -> - -> _cy `i _y `uc _color ]
+[; ;graphic.c: 34: GLCD_SetPixel(cx+x, cy-y, color);
+"34
+[e ( _GLCD_SetPixel (3 , , -> + -> _cx `i _x `uc -> - -> _cy `i _y `uc _color ]
+[; ;graphic.c: 35: GLCD_SetPixel(cx+y, cy+x, color);
+"35
+[e ( _GLCD_SetPixel (3 , , -> + -> _cx `i _y `uc -> + -> _cy `i _x `uc _color ]
+[; ;graphic.c: 36: GLCD_SetPixel(cx-y, cy+x, color);
+"36
+[e ( _GLCD_SetPixel (3 , , -> - -> _cx `i _y `uc -> + -> _cy `i _x `uc _color ]
+[; ;graphic.c: 37: GLCD_SetPixel(cx-y, cy-x, color);
+"37
+[e ( _GLCD_SetPixel (3 , , -> - -> _cx `i _y `uc -> - -> _cy `i _x `uc _color ]
+[; ;graphic.c: 38: GLCD_SetPixel(cx+y, cy-x, color);
+"38
+[e ( _GLCD_SetPixel (3 , , -> + -> _cx `i _y `uc -> - -> _cy `i _x `uc _color ]
+[; ;graphic.c: 39: y++;
+"39
+[e ++ _y -> 1 `i ]
+[; ;graphic.c: 40: radiusError += ychange;
+"40
+[e =+ _radiusError _ychange ]
+[; ;graphic.c: 41: ychange += 2;
+"41
+[e =+ _ychange -> 2 `i ]
+[; ;graphic.c: 42: if ( 2*radiusError + xchange > 0 )
+"42
+[e $ ! > + * -> 2 `i _radiusError _xchange -> 0 `i 14  ]
+[; ;graphic.c: 43: {
+"43
+{
+[; ;graphic.c: 44: x--;
+"44
+[e -- _x -> 1 `i ]
+[; ;graphic.c: 45: radiusError += xchange;
+"45
+[e =+ _radiusError _xchange ]
+[; ;graphic.c: 46: xchange += 2;
+"46
+[e =+ _xchange -> 2 `i ]
+"47
+}
+[e :U 14 ]
+"48
+}
+[e :U 11 ]
+"29
+[e $ >= _x _y 12  ]
+[e :U 13 ]
+[; ;graphic.c: 47: }
+[; ;graphic.c: 48: }
+[; ;graphic.c: 49: }
+"49
+[e :UE 10 ]
+}
+"52
+[v _GLCD_Line `(v ~T0 @X0 1 ef4`ui`ui`ui`ui ]
+"53
+{
+[; ;graphic.c: 52: void GLCD_Line(unsigned int X1,unsigned int Y1,unsigned int X2,unsigned int Y2)
+[; ;graphic.c: 53: {
+[e :U _GLCD_Line ]
+"52
+[v _X1 `ui ~T0 @X0 1 r1 ]
+[v _Y1 `ui ~T0 @X0 1 r2 ]
+[v _X2 `ui ~T0 @X0 1 r3 ]
+[v _Y2 `ui ~T0 @X0 1 r4 ]
+"53
+[f ]
+"54
+[v _CurrentX `i ~T0 @X0 1 a ]
+[v _CurrentY `i ~T0 @X0 1 a ]
+[v _Xinc `i ~T0 @X0 1 a ]
+[v _Yinc `i ~T0 @X0 1 a ]
+"55
+[v _Dx `i ~T0 @X0 1 a ]
+[v _Dy `i ~T0 @X0 1 a ]
+[v _TwoDx `i ~T0 @X0 1 a ]
+[v _TwoDy `i ~T0 @X0 1 a ]
+"56
+[v _TwoDxAccumulatedError `i ~T0 @X0 1 a ]
+[v _TwoDyAccumulatedError `i ~T0 @X0 1 a ]
+[; ;graphic.c: 54: int CurrentX, CurrentY, Xinc, Yinc,
+[; ;graphic.c: 55: Dx, Dy, TwoDx, TwoDy,
+[; ;graphic.c: 56: TwoDxAccumulatedError, TwoDyAccumulatedError;
+[; ;graphic.c: 58: Dx = (X2-X1);
+"58
+[e = _Dx -> - _X2 _X1 `i ]
+[; ;graphic.c: 59: Dy = (Y2-Y1);
+"59
+[e = _Dy -> - _Y2 _Y1 `i ]
+[; ;graphic.c: 61: TwoDx = Dx + Dx;
+"61
+[e = _TwoDx + _Dx _Dx ]
+[; ;graphic.c: 62: TwoDy = Dy + Dy;
+"62
+[e = _TwoDy + _Dy _Dy ]
+[; ;graphic.c: 64: CurrentX = X1;
+"64
+[e = _CurrentX -> _X1 `i ]
+[; ;graphic.c: 65: CurrentY = Y1;
+"65
+[e = _CurrentY -> _Y1 `i ]
+[; ;graphic.c: 67: Xinc = 1;
+"67
+[e = _Xinc -> 1 `i ]
+[; ;graphic.c: 68: Yinc = 1;
+"68
+[e = _Yinc -> 1 `i ]
+[; ;graphic.c: 70: if(Dx < 0)
+"70
+[e $ ! < _Dx -> 0 `i 16  ]
+[; ;graphic.c: 71: {
+"71
+{
+[; ;graphic.c: 72: Xinc = -1;
+"72
+[e = _Xinc -U -> 1 `i ]
+[; ;graphic.c: 73: Dx = -Dx;
+"73
+[e = _Dx -U _Dx ]
+[; ;graphic.c: 74: TwoDx = -TwoDx;
+"74
+[e = _TwoDx -U _TwoDx ]
+"75
+}
+[e :U 16 ]
+[; ;graphic.c: 75: }
+[; ;graphic.c: 77: if (Dy < 0)
+"77
+[e $ ! < _Dy -> 0 `i 17  ]
+[; ;graphic.c: 78: {
+"78
+{
+[; ;graphic.c: 79: Yinc = -1;
+"79
+[e = _Yinc -U -> 1 `i ]
+[; ;graphic.c: 80: Dy = -Dy;
+"80
+[e = _Dy -U _Dy ]
+[; ;graphic.c: 81: TwoDy = -TwoDy;
+"81
+[e = _TwoDy -U _TwoDy ]
+"82
+}
+[e :U 17 ]
+[; ;graphic.c: 82: }
+[; ;graphic.c: 84: GLCD_SetPixel(X1,Y1, color);
+"84
+[e ( _GLCD_SetPixel (3 , , -> _X1 `uc -> _Y1 `uc _color ]
+[; ;graphic.c: 86: if ((Dx != 0) || (Dy != 0))
+"86
+[e $ ! || != _Dx -> 0 `i != _Dy -> 0 `i 18  ]
+[; ;graphic.c: 87: {
+"87
+{
+[; ;graphic.c: 89: if (Dy <= Dx)
+"89
+[e $ ! <= _Dy _Dx 19  ]
+[; ;graphic.c: 90: {
+"90
+{
+[; ;graphic.c: 91: TwoDxAccumulatedError = 0;
+"91
+[e = _TwoDxAccumulatedError -> 0 `i ]
+[; ;graphic.c: 92: do
+"92
+[e :U 22 ]
+[; ;graphic.c: 93: {
+"93
+{
+[; ;graphic.c: 94: CurrentX += Xinc;
+"94
+[e =+ _CurrentX _Xinc ]
+[; ;graphic.c: 95: TwoDxAccumulatedError += TwoDy;
+"95
+[e =+ _TwoDxAccumulatedError _TwoDy ]
+[; ;graphic.c: 96: if(TwoDxAccumulatedError > Dx)
+"96
+[e $ ! > _TwoDxAccumulatedError _Dx 23  ]
+[; ;graphic.c: 97: {
+"97
+{
+[; ;graphic.c: 98: CurrentY += Yinc;
+"98
+[e =+ _CurrentY _Yinc ]
+[; ;graphic.c: 99: TwoDxAccumulatedError -= TwoDx;
+"99
+[e =- _TwoDxAccumulatedError _TwoDx ]
+"100
+}
+[e :U 23 ]
+[; ;graphic.c: 100: }
+[; ;graphic.c: 101: GLCD_SetPixel(CurrentX,CurrentY, color);
+"101
+[e ( _GLCD_SetPixel (3 , , -> _CurrentX `uc -> _CurrentY `uc _color ]
+"102
+}
+[; ;graphic.c: 102: }while (CurrentX != X2);
+[e $ != -> _CurrentX `ui _X2 22  ]
+[e :U 21 ]
+"103
+}
+[; ;graphic.c: 103: }
+[e $U 24  ]
+"104
+[e :U 19 ]
+[; ;graphic.c: 104: else
+[; ;graphic.c: 105: {
+"105
+{
+[; ;graphic.c: 106: TwoDyAccumulatedError = 0;
+"106
+[e = _TwoDyAccumulatedError -> 0 `i ]
+[; ;graphic.c: 107: do
+"107
+[e :U 27 ]
+[; ;graphic.c: 108: {
+"108
+{
+[; ;graphic.c: 109: CurrentY += Yinc;
+"109
+[e =+ _CurrentY _Yinc ]
+[; ;graphic.c: 110: TwoDyAccumulatedError += TwoDx;
+"110
+[e =+ _TwoDyAccumulatedError _TwoDx ]
+[; ;graphic.c: 111: if(TwoDyAccumulatedError>Dy)
+"111
+[e $ ! > _TwoDyAccumulatedError _Dy 28  ]
+[; ;graphic.c: 112: {
+"112
+{
+[; ;graphic.c: 113: CurrentX += Xinc;
+"113
+[e =+ _CurrentX _Xinc ]
+[; ;graphic.c: 114: TwoDyAccumulatedError -= TwoDy;
+"114
+[e =- _TwoDyAccumulatedError _TwoDy ]
+"115
+}
+[e :U 28 ]
+[; ;graphic.c: 115: }
+[; ;graphic.c: 116: GLCD_SetPixel(CurrentX,CurrentY, color);
+"116
+[e ( _GLCD_SetPixel (3 , , -> _CurrentX `uc -> _CurrentY `uc _color ]
+"117
+}
+[; ;graphic.c: 117: }while (CurrentY != Y2);
+[e $ != -> _CurrentY `ui _Y2 27  ]
+[e :U 26 ]
+"118
+}
+[e :U 24 ]
+"119
+}
+[e :U 18 ]
+[; ;graphic.c: 118: }
+[; ;graphic.c: 119: }
+[; ;graphic.c: 120: }
+"120
+[e :UE 15 ]
+}

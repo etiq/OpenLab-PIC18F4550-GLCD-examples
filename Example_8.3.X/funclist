@@ -1,0 +1,25 @@
+_GLCD_ClearScreen: CODE, 28092 0 46
+___awdiv: CODE, 28568 0 164
+_GLCD_WriteCommand: CODE, 28138 0 48
+_mchip_logo: MEDIUMCONST, 29757 0 1024
+_GLCD_WriteData: CODE, 28344 0 104
+_font5x8: MEDIUMCONST, 30781 0 480
+_Delay1KTCYx: CODE, 27834 0 16
+_main: CODE, 28186 0 56
+_GLCD_ReadByteFromROMMemory: CODE, 27906 0 34
+_color: MEDIUMCONST, 31741 0 1
+_GLCD_GoTo: CODE, 28448 0 120
+font5x8@font5x8: MEDIUMCONST, 31261 0 480
+_GLCD_Delay: CODE, 27806 0 4
+_GLCD_DisableController: CODE, 27976 0 38
+__initialization: CODE, 27820 0 4
+_GLCD_Bitmap: CODE, 28242 0 102
+_Delay_s: CODE, 28052 0 40
+_logoglcd1: MEDIUMCONST, 31742 0 1024
+_logoglcd2: MEDIUMCONST, 28733 0 1024
+_GLCD_EnableController: CODE, 28014 0 38
+_delay_ms: CODE, 27850 0 26
+_GLCD_ReadStatus: CODE, 27940 0 36
+_GLCD_InitializePorts: CODE, 27810 0 10
+_GLCD_Initialize: CODE, 27876 0 30
+Total: 4949
